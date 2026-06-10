@@ -1,0 +1,2076 @@
+{
+  "info": {
+    "_postman_id": "bb562779-a677-4f79-b250-ccd2403180dd",
+    "name": "Easy_Marketing_by_BS",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51175695",
+    "_collection_link": "https://go.postman.co/collection/51175695-bb562779-a677-4f79-b250-ccd2403180dd?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "TEMPLATE",
+      "item": [
+        {
+          "name": "EMAIL",
+          "item": [
+            {
+              "name": "CREATE_EMAIL_TEMPLATE",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\":\"Test Template Name\",\r\n    \"subject\":\"Template Subject\",\r\n    \"body\":\"Test body text of email template\",\r\n    \"footer_line_1\":\"Best Regards\",\r\n    \"footer_line_2\":\"Person Name\",\r\n    \"footer_line_3\":\"Person Designation\",\r\n    \"footer_line_4\":\"Person Address\",\r\n    \"logo_bg_color\":\"#fefefe\",\r\n    \"is_logo_bg_active\":\"1\",\r\n    \"bg_color\":\"#6278df\",\r\n    \"logo\":\"https://api.bangladeshisoftware.com/66c8b3e4321-logo.png\",\r\n    \"type\":\"general\",\r\n    \"adderId\":\"\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_template",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_template"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UPDATE_EMAIL_TEMPLATE Copy",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\":\"Update Test Template Name\",\r\n    \"subject\":\"Template Subject\",\r\n    \"body\":\"Update Test body text of email template\",\r\n    \"footer_line_1\":\"Best Regards\",\r\n    \"footer_line_2\":\"Company Name\",\r\n    \"footer_line_3\":\"Company Designation\",\r\n    \"footer_line_4\":\"Company Address\",\r\n    \"logo_bg_color\":\"#fefefe\",\r\n    \"is_logo_bg_active\":\"1\",\r\n    \"bg_color\":\"#6278df\",\r\n    \"logo\":\"https://api.bangladeshisoftware.com/66c8b3e4321-logo.png\",\r\n    \"type\":\"general\",\r\n    \"adderId\":\"\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_template/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_template",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE_EMAIL_TEMPLATE",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_template/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_template",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "BULK_DELETE_EMAIL_TEMPLATES",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"ids\":[\"1\", \"2\", \"3\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_template",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_template"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ALL_EMAIL_TEMPLATES",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_template?page=1&limit=10&type&search",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_template"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "type": "text"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10",
+                      "type": "text"
+                    },
+                    {
+                      "key": "type",
+                      "value": null,
+                      "type": "text"
+                    },
+                    {
+                      "key": "search",
+                      "value": null,
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EMAIL_TEMPLATE_BY_ID",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_template/3",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_template",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EMAIL_TEMPLATES_FOR_OPTIONS",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_template_options?type=&search",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_template_options"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "",
+                      "description": "general"
+                    },
+                    {
+                      "key": "search",
+                      "value": null,
+                      "description": "name, subject, body"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "SMS",
+          "item": [
+            {
+              "name": "CREATE_SMS_TEMPLATE",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"message\":\"Test SMS Template Name\",\r\n    \"adderId\":\"1\",\r\n    \"adderRole\":\"admin\",\r\n    \"adderName\":\"Admin Name\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_template",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_template"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UPDATE_SMS_TEMPLATE Copy",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"message\":\"Update Test SMS Template\",\r\n    \"adderId\":\"1\",\r\n    \"adderRole\":\"admin\",\r\n    \"adderName\":\"Admin Name\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_template/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_template",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE_SMS_TEMPLATE",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_template/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_template",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "BULK_DELETE_SMS_TEMPLATES",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"ids\":[\"1\", \"2\", \"3\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_template",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_template"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ALL_SMS_TEMPLATES",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_template?page=1&limit=10&search=",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_template"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "search",
+                      "value": "",
+                      "description": "message"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SMS_TEMPLATE_BY_ID",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_template/3?search",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_template",
+                    "3"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": null,
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EMAIL_TEMPLATES_FOR_OPTIONS",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_template_options?search",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_template_options"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": null,
+                      "description": "name, subject, body"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GROUP",
+      "item": [
+        {
+          "name": "EMAIL",
+          "item": [
+            {
+              "name": "CREATE_EMAIL_GROUP",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\":\"Organization All Applicant\",\r\n    \"emails\":[\r\n        \"cao.bangladeshisoftware@gmail.com\",\r\n        \"coo.bangladeshisoftware@gmail.com\"\r\n    ],\r\n    \"adderId\":\"1\",\r\n    \"adderRole\":\"admin\",\r\n    \"adderName\":\"Adder Name\",\r\n    \"type\":\"general\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_group",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_group"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UPDATE_EMAIL_GROUP",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\":\"Organization All applicant's\",\r\n    \"emails\":[\r\n        \"cao.bangladeshisoftware@gmail.com\",\r\n        \"coo.bangladeshisoftware@gmail.com\"\r\n    ],\r\n    \"adderId\":\"1\",\r\n    \"adderRole\":\"admin\",\r\n    \"adderName\":\"Adder Name\",\r\n    \"type\":\"general\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_group/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_group",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE_EMAIL_GROUP",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_group/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_group",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "BULK_DELETE_EMAIL_GROUP",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"ids\": [\"1\", \"2\", \"3\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_group",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_group"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ALL_EMAIL_GROUPS",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_group?page=1&limit=10&type&search",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_group"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "type": "text"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10",
+                      "type": "text"
+                    },
+                    {
+                      "key": "type",
+                      "value": null,
+                      "description": "general |",
+                      "type": "text"
+                    },
+                    {
+                      "key": "search",
+                      "value": null,
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EMAIL_GROUP_BY_ID",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_group/3",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_group",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EMAIL_GROUPS_FOR_OPTIONS",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_group_options?type&search",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_group_options"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": null,
+                      "description": "general |"
+                    },
+                    {
+                      "key": "search",
+                      "value": null
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "SMS",
+          "item": [
+            {
+              "name": "CREATE_SMS_GROUP",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\":\"All Employees Numbers\",\r\n    \"numbers\":[\r\n        \"8801789080342\",\r\n        \"8801306348902\"\r\n    ],\r\n    \"adderId\":\"1\",\r\n    \"adderRole\":\"admin\",\r\n    \"adderName\":\"Adder Name\",\r\n    \"type\":\"general\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_group",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_group"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UPDATE_SMS_GROUP",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\":\"New Applicant Contact\",\r\n    \"numbers\":[\r\n        \"8801789080342\",\r\n        \"8801306348902\"\r\n    ],\r\n    \"adderId\":\"1\",\r\n    \"adderRole\":\"admin\",\r\n    \"adderName\":\"Adder Name\",\r\n    \"type\":\"general\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_group/2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_group",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE_SMS_GROUP",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_group/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_group",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "BULK_SMS_EMAIL_GROUP",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"ids\": [\"1\", \"2\", \"3\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_group",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_group"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ALL_SMS_GROUPS",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_group?page=1&limit=10&type&search",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_group"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "type",
+                      "value": null,
+                      "description": "general "
+                    },
+                    {
+                      "key": "search",
+                      "value": null
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SMS_GROUP_BY_ID",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_group/3",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_group",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SMS_GROUPS_FOR_OPTIONS",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_group_options?type&search",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_group_options"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": null,
+                      "description": "general |"
+                    },
+                    {
+                      "key": "search",
+                      "value": null
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HISTORY",
+      "item": [
+        {
+          "name": "EMAIL",
+          "item": [
+            {
+              "name": "EMAIL_SENT_HISTORIES",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_history?page=1&limit=10&search&from_date&to_date",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_history"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "search",
+                      "value": null
+                    },
+                    {
+                      "key": "from_date",
+                      "value": null,
+                      "description": "2026-06-01"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": null,
+                      "description": "2026-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EMAIL_SENT_SUMMARIES",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_summaries_history?from_date=2026-06-10&to_date=2026-06-10",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_summaries_history"
+                  ],
+                  "query": [
+                    {
+                      "key": "from_date",
+                      "value": "2026-06-10",
+                      "description": "2026-06-10"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "2026-06-10",
+                      "description": "2026-06-10"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EMAIL_SENT_HISTORY_BY_ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_history/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_history",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EMAIL_HISTORY",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_history/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_history",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "BULK_EMAIL_HISTORIES",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"ids\":[\"1\", \"2\", \"3\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/email_history",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "email_history"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "SMS",
+          "item": [
+            {
+              "name": "SMS_SENT_HISTORIES",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_history?page=1&limit=10&search&from_date&to_date",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_history"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "search",
+                      "value": null
+                    },
+                    {
+                      "key": "from_date",
+                      "value": null,
+                      "description": "2026-06-01"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": null,
+                      "description": "2026-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SMS_SENT_SUMMARIES",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_summaries_history?from_date=2026-06-10&to_date=2026-06-10",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_summaries_history"
+                  ],
+                  "query": [
+                    {
+                      "key": "from_date",
+                      "value": "2026-06-10",
+                      "description": "2026-06-10"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "2026-06-10",
+                      "description": "2026-06-10"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SMS_SENT_HISTORY_BY_ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_history/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_history",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SMS_HISTORY",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_history/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_history",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "BULK_SMS_HISTORIES",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"ids\":[\"1\", \"2\", \"3\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/sms_history",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "sms_history"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CONFIG",
+      "item": [
+        {
+          "name": "SMTP",
+          "item": [
+            {
+              "name": "SMTP_CONFIG_CREATE",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"provider\":\"SMTP\",\r\n    \"host\":\"mail.saskarentpay.xdomainhost.com\",\r\n    \"port\":\"465\",\r\n    \"username\":\"admin@saskarentpay.xdomainhost.com\",\r\n    \"password\":\"Z7W!KZi@bKvh[&)8\",\r\n    \"secure\":\"1\",\r\n    \"sender_name\":\"admin@saskarentpay.xdomainhost.com\",\r\n    \"sender_email\":\"admin@saskarentpay.xdomainhost.com\",\r\n    \"reply_to\":\"admin@saskarentpay.xdomainhost.com\",\r\n    \"is_active\":\"1\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/smtp_setting",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "smtp_setting"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SMTP_CONFIG_UPDATE",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"provider\":\"SMTP\",\r\n    \"host\":\"mail.saskarentpay.xdomainhost.com\",\r\n    \"port\":\"465\",\r\n    \"username\":\"admin@saskarentpay.xdomainhost.com\",\r\n    \"password\":\"Z7W!KZi@bKvh[&)8\",\r\n    \"secure\":\"1\",\r\n    \"sender_name\":\"admin@saskarentpay.xdomainhost.com\",\r\n    \"sender_email\":\"admin@saskarentpay.xdomainhost.com\",\r\n    \"reply_to\":\"admin@saskarentpay.xdomainhost.com\",\r\n    \"is_active\":\"1\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/smtp_setting/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "smtp_setting",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SMTP_CONFIG_DELETE",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/smtp_setting/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "smtp_setting",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "DEFAULT_SMS_GETEWAY",
+          "item": [
+            {
+              "name": "SMS_GATEWAY_CONFIG_SETUP",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"provider_name\": \"Bulk SMS X\",\r\n  \"provider_website\": \"https://bulksmsx.com\",\r\n  \"documentation_url\": \"https://bulksmsx.com/easy-marketing/admin/docs/send-sms\",\r\n  \"base_api_url\": \"https://api.bulksmsx.com\",\r\n  \"sms_send_endpoint\": \"/api/v2/sms/send\",\r\n  \"sms_balance_endpoint\": \"/api/v2/sms/balance\",\r\n  \"secret_key\": \"e09a5dbc1bfc7bcb\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/save_sms_config",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "save_sms_config"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SERVICES",
+      "item": [
+        {
+          "name": "EMAIL",
+          "item": [
+            {
+              "name": "SEND_EMAIL",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"to\":\"cao.bangladeshisoftware@gmail.com\",\r\n    \"subject\":\"Test Message\",\r\n    \"bg_color\":\"#073f79\",\r\n    \"logo\":\"https://api.bangladeshisoftware.com/66c8b3e4321-logo.png\",\r\n    \"footer_line_1\":\"Regards\",\r\n    \"footer_line_2\":\"Dev BS\",\r\n    \"footer_line_3\":\"Bangladeshi Software LTD.\",\r\n    \"footer_line_4\":\"http://abcd.com\",\r\n    \"logo_bg_color\":\"\",\r\n    \"is_logo_bg_active\":false,\r\n    \"body\":\"This is a test mail for testing html email ui. Thank you.\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/send_email",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "send_email"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SEND_BULK_EMAIL",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"emails\": [\r\n    \"cao.bangladeshisoftware@gmail.com\",\r\n    \"coo.bangladeshisoftware@gmail.com\",\r\n    \"dev2.bangladeshisoftware@gmail.com\"\r\n  ],\r\n  \"subject\": \"Test Message\",\r\n    \"bg_color\":\"#073f79\",\r\n    \"logo\":\"https://api.bangladeshisoftware.com/66c8b3e4321-logo.png\",\r\n    \"footer_line_1\":\"Regards\",\r\n    \"footer_line_2\":\"Dev BS\",\r\n    \"footer_line_3\":\"Bangladeshi Software LTD.\",\r\n    \"footer_line_4\":\"http://abcd.com\",\r\n    \"logo_bg_color\":\"\",\r\n    \"is_logo_bg_active\":false,\r\n    \"body\":\"This is a test mail for testing html email ui. Thank you.\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/send_bulk_email",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "send_bulk_email"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "SMS",
+          "item": [
+            {
+              "name": "SEND_SMS",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"number\":\"01306348902\",\r\n    \"message\":\"Your OTP verification is: 255834\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/send_sms",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "send_sms"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SEND_BULK_SMS",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"message\": \"Welcome to the BulksmsX\",\r\n  \"numbers\": [\r\n    \"01306348902\",\r\n    \"01789080342\"\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/easy-marketing/send_bulk_sms",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "easy-marketing",
+                    "send_bulk_sms"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "OTHERS",
+      "item": [
+        {
+          "name": "UPLOAD_FILE",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "uuid": "ef9ca5ba-e5e6-45fd-bd8f-3efdf7f8129c",
+                  "src": "/C:/Users/CAO/Downloads/images (3).jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:5000/easy-marketing/upload_file",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "easy-marketing",
+                "upload_file"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

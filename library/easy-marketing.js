@@ -2,6 +2,10 @@ const express = require('express');
 const db = require('../utils/db');
 const easyMarketing = require('@bangladeshisoftwarecao/easy-marketing-by-bs');
 
+/*
+Note: if you have a any middleware, like: auth, role or etc. then import it and use that route
+*/
+
 // Init library
 async function init() {
   await easyMarketing.migrate(db);
@@ -17,6 +21,18 @@ const router = express.Router();
 router.route('/').get(async (req, res) => {
   res.status(200).json({ message: 'Welcome to Easy Marketing.' });
 });
+
+// storage config
+router.post(
+  '/upload_file',
+  easyMarketing.upload_file.Upload('file'),
+  (req, res) => {
+    res.status(201).json({
+      path: req.filename,
+      url: req.filelink,
+    });
+  },
+);
 
 // smtp creating
 router.route('/smtp_setting').post(async (req, res) => {
@@ -140,20 +156,47 @@ router.route('/save_sms_config').post(async (req, res) => {
 // send email.
 router.route('/send_email').post(async (req, res) => {
   try {
-    const { to, subject, html } = req.body;
-    if (!to || !subject || !html) {
+    const {
+      to,
+      subject,
+      bg_color,
+      logo,
+      footer_line_1,
+      footer_line_2,
+      footer_line_3,
+      footer_line_4,
+      logo_bg_color,
+      is_logo_bg_active,
+      body,
+    } = req.body;
+    if (!to || !subject || !body) {
       return res.status(400).json({ message: 'Required field are missing!' });
     }
+
+    // if you want to apply generate template of easy marketing.
+
+    const html_template = easyMarketing.email_ui({
+      bg_color,
+      logo,
+      footer_line_1,
+      footer_line_2,
+      footer_line_3,
+      footer_line_4,
+      logo_bg_color,
+      is_logo_bg_active,
+      body,
+      subject,
+    });
 
     const response = await easyMarketing.email.sendEmail(db, {
       to,
       subject,
-      html,
+      html: html_template,
     });
     if (response.success) {
       await easyMarketing.email_history.createEmailHistory(
         {
-          html: html,
+          html: html_template,
           subject: subject,
           emails: JSON.stringify([to]),
         },
@@ -175,20 +218,46 @@ router.route('/send_email').post(async (req, res) => {
 // send bulk email.
 router.route('/send_bulk_email').post(async (req, res) => {
   try {
-    const { emails, subject, html } = req.body;
+    const {
+      emails,
+      subject,
+      bg_color,
+      logo,
+      footer_line_1,
+      footer_line_2,
+      footer_line_3,
+      footer_line_4,
+      logo_bg_color,
+      is_logo_bg_active,
+      body,
+    } = req.body;
 
-    if (!emails || !subject || !html) {
+    if (!emails || !subject || !body) {
       return res.status(400).json({
         message: 'Required field are missing!',
       });
     }
+
+    // General html email ui
+    const html_template = easyMarketing.email_ui({
+      bg_color,
+      logo,
+      footer_line_1,
+      footer_line_2,
+      footer_line_3,
+      footer_line_4,
+      logo_bg_color,
+      is_logo_bg_active,
+      body,
+      subject,
+    });
 
     const emailsArray = Array.isArray(emails) ? emails : [emails];
 
     const response = await easyMarketing.email.sendBulkEmail(db, {
       emails: emailsArray,
       subject,
-      html,
+      html: html_template,
     });
 
     // save only success emails
@@ -200,7 +269,7 @@ router.route('/send_bulk_email').post(async (req, res) => {
       if (successEmails.length > 0) {
         await easyMarketing.email_history.createEmailHistory(
           {
-            html,
+            html: html_template,
             subject,
             emails: JSON.stringify(successEmails),
           },
@@ -221,6 +290,8 @@ router.route('/send_bulk_email').post(async (req, res) => {
     });
   }
 });
+
+// black, white email.
 
 // send sms
 router.route('/send_sms').post(async (req, res) => {
@@ -584,6 +655,28 @@ router.route('/email_group/:id').get(async (req, res) => {
   }
 });
 
+router.route('/email_group_options').get(async (req, res) => {
+  try {
+    const query = req.query; // type, search
+
+    const response = await easyMarketing.email_group.getEmailGroupsOption(
+      query,
+      db,
+    );
+
+    return res.status(response.success ? 200 : 404).json({
+      success: response.success,
+      data: response.data || null,
+      message: response.message || 'Email group fetched successfully',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error?.message || 'Something went wrong!',
+    });
+  }
+});
+
 // sms
 
 // create sms group
@@ -843,7 +936,31 @@ router.route('/sms_group').get(async (req, res) => {
   }
 });
 
-// get single sms group by id
+// get sms group options
+
+router.route('/sms_group_options').get(async (req, res) => {
+  try {
+    const query = req.query;
+
+    const response = await easyMarketing.sms_group.getSmsGroupsOption(
+      query,
+      db,
+    );
+
+    return res.status(response.success ? 200 : 404).json({
+      success: response.success,
+      data: response.data || null,
+      message: response.message || 'SMS group options fetched successfully',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error?.message || 'Something went wrong!',
+    });
+  }
+});
+
+// sms group by id.
 
 router.route('/sms_group/:id').get(async (req, res) => {
   try {
@@ -1118,6 +1235,31 @@ router.route('/email_template/:id').get(async (req, res) => {
   }
 });
 
+// get email template options
+
+router.route('/email_template_options').get(async (req, res) => {
+  try {
+    const query = req.query; // type and search.
+
+    const response = await easyMarketing.email_template.getEmailTemplatesOption(
+      query,
+      db,
+    );
+
+    return res.status(response.success ? 200 : 404).json({
+      success: response.success,
+      data: response.data || null,
+      message:
+        response.message || 'Email template options fetched successfully',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error?.message || 'Something went wrong!',
+    });
+  }
+});
+
 /// sms template.
 
 // create sms template
@@ -1337,6 +1479,28 @@ router.route('/sms_template/:id').get(async (req, res) => {
   }
 });
 
+router.route('/sms_template_options').get(async (req, res) => {
+  try {
+    const query = req.query; // search .
+
+    const response = await easyMarketing.sms_template.getSmsTemplatesOption(
+      query,
+      db,
+    );
+
+    return res.status(response.success ? 200 : 404).json({
+      success: response.success,
+      data: response.data || null,
+      message: response.message || 'SMS template options fetched successfully',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error?.message || 'Something went wrong!',
+    });
+  }
+});
+
 // history api's
 // get all email histories
 
@@ -1349,6 +1513,30 @@ router.route('/email_history').get(async (req, res) => {
       db,
     );
 
+    return res.status(response.success ? 200 : 400).json({
+      success: response.success,
+      data: response.data || [],
+      pagination: response.pagination || null,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error?.message || 'Something went wrong!',
+    });
+  }
+});
+
+// get summaries history of sent emails
+
+router.route('/email_summaries_history').get(async (req, res) => {
+  try {
+    const query = req.query;
+
+    const response = await easyMarketing.email_history.getEmailSummary(
+      query,
+      db,
+    );
+    console.log('query:: ', query);
     return res.status(response.success ? 200 : 400).json({
       success: response.success,
       data: response.data || [],
@@ -1474,6 +1662,29 @@ router.route('/sms_history').get(async (req, res) => {
 
     const response = await easyMarketing.sms_history.getSmsHistories(query, db);
 
+    return res.status(response.success ? 200 : 400).json({
+      success: response.success,
+      data: response.data || [],
+      pagination: response.pagination || null,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error?.message || 'Something went wrong!',
+    });
+  }
+});
+
+// get sms sent summaries info.
+
+router.route('/sms_summaries_history').get(async (req, res) => {
+  try {
+    const query = req.query;
+
+    const response = await easyMarketing.sms_history.getSmsSummary(
+      query,
+      db,
+    );
     return res.status(response.success ? 200 : 400).json({
       success: response.success,
       data: response.data || [],
