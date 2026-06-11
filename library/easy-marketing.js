@@ -1,6 +1,7 @@
 const express = require('express');
-const db = require('../utils/db');
+const db = require('../config/db2');
 const easyMarketing = require('@bangladeshisoftwarecao/easy-marketing-by-bs');
+const authenticateJWT = require('../middleware/authMiddleware');
 
 /*
 Note: if you have a any middleware, like: auth, role or etc. then import it and use that route
@@ -18,13 +19,14 @@ const router = express.Router();
 
 // Routes
 
-router.route('/').get(async (req, res) => {
+router.route('/').get(authenticateJWT, async (req, res) => {
   res.status(200).json({ message: 'Welcome to Easy Marketing.' });
 });
 
 // storage config
 router.post(
   '/upload_file',
+  authenticateJWT,
   easyMarketing.upload_file.Upload('file'),
   (req, res) => {
     res.status(201).json({
@@ -34,8 +36,26 @@ router.post(
   },
 );
 
+// get smtp settings
+router.route('/smtp_setting').get(authenticateJWT, async (req, res) => {
+  try {
+    const query = req.query; // search, page, limit
+    const response = await easyMarketing.email_config.getEmailConfigs(
+      query,
+      db,
+    );
+    res.status(200).json({
+      message: response?.message || 'SMTP getting!',
+      success: response.success,
+      response,
+    });
+  } catch (error) {
+    res.status(400).json({ message: error || 'SMTP getting error.' });
+  }
+});
+
 // smtp creating
-router.route('/smtp_setting').post(async (req, res) => {
+router.route('/smtp_setting').post(authenticateJWT, async (req, res) => {
   try {
     const body = req.body;
     const response = await easyMarketing.email_config.createEmailConfig(
@@ -53,7 +73,7 @@ router.route('/smtp_setting').post(async (req, res) => {
 
 // smtp update
 
-router.route('/smtp_setting/:id').put(async (req, res) => {
+router.route('/smtp_setting/:id').put(authenticateJWT, async (req, res) => {
   try {
     const id = req.params.id;
     const body = req.body;
@@ -92,7 +112,7 @@ router.route('/smtp_setting/:id').put(async (req, res) => {
 
 // smtp delete
 
-router.route('/smtp_setting/:id').delete(async (req, res) => {
+router.route('/smtp_setting/:id').delete(authenticateJWT, async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -117,8 +137,23 @@ router.route('/smtp_setting/:id').delete(async (req, res) => {
   }
 });
 
+// sms config get.
+router.route('/sms_config').get(authenticateJWT, async (req, res) => {
+  try {
+    const query = req.query; // search, page, limit
+    const response = await easyMarketing.sms.getSmsConfig(db);
+    res.status(200).json({
+      message: response?.message || 'config getting!',
+      success: response.success,
+      data: response,
+    });
+  } catch (error) {
+    res.status(400).json({ message: error || 'config getting error.' });
+  }
+});
+
 // sms config save.
-router.route('/save_sms_config').post(async (req, res) => {
+router.route('/save_sms_config').post(authenticateJWT, async (req, res) => {
   try {
     const body = req.body;
 
@@ -153,8 +188,55 @@ router.route('/save_sms_config').post(async (req, res) => {
   }
 });
 
+// get internal email template.
+router.route('/html_email_template').post(authenticateJWT, async (req, res) => {
+  try {
+    const {
+      bg_color,
+      logo,
+      footer_line_1,
+      footer_line_2,
+      footer_line_3,
+      footer_line_4,
+      logo_bg_color,
+      is_logo_bg_active,
+      body,
+      subject,
+    } = req.body;
+    if (!subject || !body) {
+      return res.status(400).json({ message: 'Required field are missing!' });
+    }
+
+    // if you want to apply generate template of easy marketing.
+
+    const html_template = easyMarketing.email_ui({
+      bg_color,
+      logo,
+      footer_line_1,
+      footer_line_2,
+      footer_line_3,
+      footer_line_4,
+      logo_bg_color,
+      is_logo_bg_active,
+      body,
+      subject,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: 'Email ui getting successfully',
+      data: html_template,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message || 'Email sending error!',
+      success: false,
+    });
+  }
+});
+
 // send email.
-router.route('/send_email').post(async (req, res) => {
+router.route('/send_email').post(authenticateJWT, async (req, res) => {
   try {
     const {
       to,
@@ -216,7 +298,7 @@ router.route('/send_email').post(async (req, res) => {
 });
 
 // send bulk email.
-router.route('/send_bulk_email').post(async (req, res) => {
+router.route('/send_bulk_email').post(authenticateJWT, async (req, res) => {
   try {
     const {
       emails,
@@ -294,7 +376,7 @@ router.route('/send_bulk_email').post(async (req, res) => {
 // black, white email.
 
 // send sms
-router.route('/send_sms').post(async (req, res) => {
+router.route('/send_sms').post(authenticateJWT, async (req, res) => {
   try {
     const body = req.body;
 
@@ -339,7 +421,7 @@ router.route('/send_sms').post(async (req, res) => {
 });
 
 // send bulk sms
-router.route('/send_bulk_sms').post(async (req, res) => {
+router.route('/send_bulk_sms').post(authenticateJWT, async (req, res) => {
   try {
     const body = req.body;
 
@@ -391,7 +473,7 @@ router.route('/send_bulk_sms').post(async (req, res) => {
 
 // email group
 
-router.route('/email_group').post(async (req, res) => {
+router.route('/email_group').post(authenticateJWT, async (req, res) => {
   try {
     // create
     const body = req.body;
@@ -461,7 +543,7 @@ router.route('/email_group').post(async (req, res) => {
 });
 
 // update email group
-router.route('/email_group/:id').put(async (req, res) => {
+router.route('/email_group/:id').put(authenticateJWT, async (req, res) => {
   try {
     const id = req.params.id;
     const body = req.body;
@@ -539,7 +621,7 @@ router.route('/email_group/:id').put(async (req, res) => {
 
 // delete email group
 
-router.route('/email_group/:id').delete(async (req, res) => {
+router.route('/email_group/:id').delete(authenticateJWT, async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -566,7 +648,7 @@ router.route('/email_group/:id').delete(async (req, res) => {
 
 // bulk delete email groups
 
-router.route('/email_group').delete(async (req, res) => {
+router.route('/email_group').delete(authenticateJWT, async (req, res) => {
   try {
     const body = req.body;
 
@@ -608,7 +690,7 @@ router.route('/email_group').delete(async (req, res) => {
 
 // get all email groups
 
-router.route('/email_group').get(async (req, res) => {
+router.route('/email_group').get(authenticateJWT, async (req, res) => {
   try {
     const query = req.query;
 
@@ -629,7 +711,7 @@ router.route('/email_group').get(async (req, res) => {
 
 // get single email group by id
 
-router.route('/email_group/:id').get(async (req, res) => {
+router.route('/email_group/:id').get(authenticateJWT, async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -655,7 +737,7 @@ router.route('/email_group/:id').get(async (req, res) => {
   }
 });
 
-router.route('/email_group_options').get(async (req, res) => {
+router.route('/email_group_options').get(authenticateJWT, async (req, res) => {
   try {
     const query = req.query; // type, search
 
@@ -681,7 +763,7 @@ router.route('/email_group_options').get(async (req, res) => {
 
 // create sms group
 
-router.route('/sms_group').post(async (req, res) => {
+router.route('/sms_group').post(authenticateJWT, async (req, res) => {
   try {
     const body = req.body;
 
@@ -762,7 +844,7 @@ router.route('/sms_group').post(async (req, res) => {
 
 // update sms group
 
-router.route('/sms_group/:id').put(async (req, res) => {
+router.route('/sms_group/:id').put(authenticateJWT, async (req, res) => {
   try {
     const id = req.params.id;
     const body = req.body;
@@ -849,7 +931,7 @@ router.route('/sms_group/:id').put(async (req, res) => {
 
 // delete sms group
 
-router.route('/sms_group/:id').delete(async (req, res) => {
+router.route('/sms_group/:id').delete(authenticateJWT, async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -876,7 +958,7 @@ router.route('/sms_group/:id').delete(async (req, res) => {
 
 // bulk delete sms groups
 
-router.route('/sms_group').delete(async (req, res) => {
+router.route('/sms_group').delete(authenticateJWT, async (req, res) => {
   try {
     const body = req.body;
 
@@ -917,7 +999,7 @@ router.route('/sms_group').delete(async (req, res) => {
 
 // get all sms groups
 
-router.route('/sms_group').get(async (req, res) => {
+router.route('/sms_group').get(authenticateJWT, async (req, res) => {
   try {
     const query = req.query;
 
@@ -938,7 +1020,7 @@ router.route('/sms_group').get(async (req, res) => {
 
 // get sms group options
 
-router.route('/sms_group_options').get(async (req, res) => {
+router.route('/sms_group_options').get(authenticateJWT, async (req, res) => {
   try {
     const query = req.query;
 
@@ -962,7 +1044,7 @@ router.route('/sms_group_options').get(async (req, res) => {
 
 // sms group by id.
 
-router.route('/sms_group/:id').get(async (req, res) => {
+router.route('/sms_group/:id').get(authenticateJWT, async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -991,7 +1073,7 @@ router.route('/sms_group/:id').get(async (req, res) => {
 // template and history:pagination.
 // create email template
 
-router.route('/email_template').post(async (req, res) => {
+router.route('/email_template').post(authenticateJWT, async (req, res) => {
   try {
     const body = req.body;
 
@@ -1057,7 +1139,7 @@ router.route('/email_template').post(async (req, res) => {
 
 // update email template
 
-router.route('/email_template/:id').put(async (req, res) => {
+router.route('/email_template/:id').put(authenticateJWT, async (req, res) => {
   try {
     const id = req.params.id;
     const body = req.body;
@@ -1110,37 +1192,39 @@ router.route('/email_template/:id').put(async (req, res) => {
 
 // delete email template
 
-router.route('/email_template/:id').delete(async (req, res) => {
-  try {
-    const id = req.params.id;
+router
+  .route('/email_template/:id')
+  .delete(authenticateJWT, async (req, res) => {
+    try {
+      const id = req.params.id;
 
-    if (!id) {
-      return res.status(400).json({
+      if (!id) {
+        return res.status(400).json({
+          success: false,
+          message: 'Template id is required',
+        });
+      }
+
+      const response = await easyMarketing.email_template.deleteEmailTemplate(
+        id,
+        db,
+      );
+
+      return res.status(response.success ? 200 : 400).json({
+        success: response.success,
+        message: response.message || 'Email template deleted successfully',
+      });
+    } catch (error) {
+      return res.status(500).json({
         success: false,
-        message: 'Template id is required',
+        message: error?.message || 'Something went wrong!',
       });
     }
-
-    const response = await easyMarketing.email_template.deleteEmailTemplate(
-      id,
-      db,
-    );
-
-    return res.status(response.success ? 200 : 400).json({
-      success: response.success,
-      message: response.message || 'Email template deleted successfully',
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error?.message || 'Something went wrong!',
-    });
-  }
-});
+  });
 
 // bulk delete email templates
 
-router.route('/email_template').delete(async (req, res) => {
+router.route('/email_template').delete(authenticateJWT, async (req, res) => {
   try {
     const body = req.body;
 
@@ -1182,7 +1266,7 @@ router.route('/email_template').delete(async (req, res) => {
 
 // get all email templates
 
-router.route('/email_template').get(async (req, res) => {
+router.route('/email_template').get(authenticateJWT, async (req, res) => {
   try {
     const query = req.query;
 
@@ -1206,7 +1290,7 @@ router.route('/email_template').get(async (req, res) => {
 
 // get single email template by id
 
-router.route('/email_template/:id').get(async (req, res) => {
+router.route('/email_template/:id').get(authenticateJWT, async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -1237,34 +1321,34 @@ router.route('/email_template/:id').get(async (req, res) => {
 
 // get email template options
 
-router.route('/email_template_options').get(async (req, res) => {
-  try {
-    const query = req.query; // type and search.
+router
+  .route('/email_template_options')
+  .get(authenticateJWT, async (req, res) => {
+    try {
+      const query = req.query; // type and search.
 
-    const response = await easyMarketing.email_template.getEmailTemplatesOption(
-      query,
-      db,
-    );
+      const response =
+        await easyMarketing.email_template.getEmailTemplatesOption(query, db);
 
-    return res.status(response.success ? 200 : 404).json({
-      success: response.success,
-      data: response.data || null,
-      message:
-        response.message || 'Email template options fetched successfully',
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error?.message || 'Something went wrong!',
-    });
-  }
-});
+      return res.status(response.success ? 200 : 404).json({
+        success: response.success,
+        data: response.data || null,
+        message:
+          response.message || 'Email template options fetched successfully',
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: error?.message || 'Something went wrong!',
+      });
+    }
+  });
 
 /// sms template.
 
 // create sms template
 
-router.route('/sms_template').post(async (req, res) => {
+router.route('/sms_template').post(authenticateJWT, async (req, res) => {
   try {
     const body = req.body;
 
@@ -1307,7 +1391,7 @@ router.route('/sms_template').post(async (req, res) => {
 
 // update sms template
 
-router.route('/sms_template/:id').put(async (req, res) => {
+router.route('/sms_template/:id').put(authenticateJWT, async (req, res) => {
   try {
     const id = req.params.id;
     const body = req.body;
@@ -1358,7 +1442,7 @@ router.route('/sms_template/:id').put(async (req, res) => {
 
 // delete sms template
 
-router.route('/sms_template/:id').delete(async (req, res) => {
+router.route('/sms_template/:id').delete(authenticateJWT, async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -1385,7 +1469,7 @@ router.route('/sms_template/:id').delete(async (req, res) => {
 
 // bulk delete sms templates
 
-router.route('/sms_template').delete(async (req, res) => {
+router.route('/sms_template').delete(authenticateJWT, async (req, res) => {
   try {
     const body = req.body;
 
@@ -1426,7 +1510,7 @@ router.route('/sms_template').delete(async (req, res) => {
 
 // get all sms templates
 
-router.route('/sms_template').get(async (req, res) => {
+router.route('/sms_template').get(authenticateJWT, async (req, res) => {
   try {
     const query = req.query;
 
@@ -1450,7 +1534,7 @@ router.route('/sms_template').get(async (req, res) => {
 
 // get single sms template by id
 
-router.route('/sms_template/:id').get(async (req, res) => {
+router.route('/sms_template/:id').get(authenticateJWT, async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -1479,7 +1563,7 @@ router.route('/sms_template/:id').get(async (req, res) => {
   }
 });
 
-router.route('/sms_template_options').get(async (req, res) => {
+router.route('/sms_template_options').get(authenticateJWT, async (req, res) => {
   try {
     const query = req.query; // search .
 
@@ -1504,7 +1588,7 @@ router.route('/sms_template_options').get(async (req, res) => {
 // history api's
 // get all email histories
 
-router.route('/email_history').get(async (req, res) => {
+router.route('/email_history').get(authenticateJWT, async (req, res) => {
   try {
     const query = req.query;
 
@@ -1528,31 +1612,33 @@ router.route('/email_history').get(async (req, res) => {
 
 // get summaries history of sent emails
 
-router.route('/email_summaries_history').get(async (req, res) => {
-  try {
-    const query = req.query;
+router
+  .route('/email_summaries_history')
+  .get(authenticateJWT, async (req, res) => {
+    try {
+      const query = req.query;
 
-    const response = await easyMarketing.email_history.getEmailSummary(
-      query,
-      db,
-    );
-    console.log('query:: ', query);
-    return res.status(response.success ? 200 : 400).json({
-      success: response.success,
-      data: response.data || [],
-      pagination: response.pagination || null,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error?.message || 'Something went wrong!',
-    });
-  }
-});
+      const response = await easyMarketing.email_history.getEmailSummary(
+        query,
+        db,
+      );
+      console.log('query:: ', query);
+      return res.status(response.success ? 200 : 400).json({
+        success: response.success,
+        data: response.data || [],
+        pagination: response.pagination || null,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: error?.message || 'Something went wrong!',
+      });
+    }
+  });
 
 // get single email history by id
 
-router.route('/email_history/:id').get(async (req, res) => {
+router.route('/email_history/:id').get(authenticateJWT, async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -1583,7 +1669,7 @@ router.route('/email_history/:id').get(async (req, res) => {
 
 // delete email history
 
-router.route('/email_history/:id').delete(async (req, res) => {
+router.route('/email_history/:id').delete(authenticateJWT, async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -1613,7 +1699,7 @@ router.route('/email_history/:id').delete(async (req, res) => {
 
 // bulk delete email histories
 
-router.route('/email_history').delete(async (req, res) => {
+router.route('/email_history').delete(authenticateJWT, async (req, res) => {
   try {
     const body = req.body;
 
@@ -1656,7 +1742,7 @@ router.route('/email_history').delete(async (req, res) => {
 
 // get all sms histories
 
-router.route('/sms_history').get(async (req, res) => {
+router.route('/sms_history').get(authenticateJWT, async (req, res) => {
   try {
     const query = req.query;
 
@@ -1677,18 +1763,36 @@ router.route('/sms_history').get(async (req, res) => {
 
 // get sms sent summaries info.
 
-router.route('/sms_summaries_history').get(async (req, res) => {
+router
+  .route('/sms_summaries_history')
+  .get(authenticateJWT, async (req, res) => {
+    try {
+      const query = req.query;
+
+      const response = await easyMarketing.sms_history.getSmsSummary(query, db);
+      return res.status(response.success ? 200 : 400).json({
+        success: response.success,
+        data: response.data || [],
+        pagination: response.pagination || null,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: error?.message || 'Something went wrong!',
+      });
+    }
+  });
+
+// get sms balance.
+router.route('/sms_balance').get(authenticateJWT, async (req, res) => {
   try {
     const query = req.query;
 
-    const response = await easyMarketing.sms_history.getSmsSummary(
-      query,
-      db,
-    );
+    const response = await easyMarketing.sms.getSmsBalance(db);
     return res.status(response.success ? 200 : 400).json({
       success: response.success,
       data: response.data || [],
-      pagination: response.pagination || null,
+      response: response,
     });
   } catch (error) {
     return res.status(500).json({
@@ -1700,7 +1804,7 @@ router.route('/sms_summaries_history').get(async (req, res) => {
 
 // get single sms history by id
 
-router.route('/sms_history/:id').get(async (req, res) => {
+router.route('/sms_history/:id').get(authenticateJWT, async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -1728,7 +1832,7 @@ router.route('/sms_history/:id').get(async (req, res) => {
 
 // delete sms history
 
-router.route('/sms_history/:id').delete(async (req, res) => {
+router.route('/sms_history/:id').delete(authenticateJWT, async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -1755,7 +1859,7 @@ router.route('/sms_history/:id').delete(async (req, res) => {
 
 // bulk delete sms histories
 
-router.route('/sms_history').delete(async (req, res) => {
+router.route('/sms_history').delete(authenticateJWT, async (req, res) => {
   try {
     const body = req.body;
 
